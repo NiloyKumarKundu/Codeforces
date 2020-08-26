@@ -58,60 +58,60 @@ ll gcd(ll n, ll m) { return m ? gcd(m, n % m) : n; }
 ll lcm(ll n, ll m) { return n / gcd(n, m) * m; }
 
 struct debugger {
-    typedef string::iterator si;
-    static void call(si it, si ed) {}
-    template<typename T, typename ... aT>
-    static void call(si it, si ed, T a, aT... rest) {
-        string b;
-        for(; *it!=','; ++it)
-            if(*it!=' ')
-                b+=*it;
-        cout << b << "=" << a << " ";
-        call(++it, ed, rest...);
-    }
+	typedef string::iterator si;
+	static void call(si it, si ed) {}
+	template<typename T, typename ... aT>
+	static void call(si it, si ed, T a, aT... rest) {
+		string b;
+		for(; *it!=','; ++it)
+			if(*it!=' ')
+				b+=*it;
+		cout << b << "=" << a << " ";
+		call(++it, ed, rest...);
+	}
 };
 
-#define oj
+#define Niloy
 
 /* ----------------------------------------------------------------------------------- */
 
 void solve() {
-	int n, m, black = 0, color = 0;
-	scan2(n, m);
-	char arr[n][m];
-    rep(i, 0, n) {
-        rep(j, 0, m) {
-			scan(arr[i][j]);
-            if(arr[i][j] == 'C' || arr[i][j] == 'M' || arr[i][j] == 'Y') {
-				color++;
-			} else {
-				black++;
-			}
-		}
+	ll n;
+	scanll(n);
+	ll countTwo = 0, countThree = 0;
+	while (!(n % 2)) {
+		countTwo++;
+		n /= 2;
 	}
 
-    if(color) {
-		cout << "#Color\n";
+	while (!(n % 3)) {
+		countThree++;
+		n /= 3;
+	}
+
+	if(n != 1 || countTwo > countThree) {
+		print(-1);
 	} else {
-		cout << "#Black&White\n";
+		printll((countThree - countTwo) + countThree);
 	}
 }
 
+
 int main() {
 #ifdef Niloy
-    read("input.txt");  
-    write("output.txt");
+	read("input.txt");  
+	write("output.txt");
 #endif
-    // fastInput;
+	// fastInput;
 
-    
-    solve();
+	
+	// solve();
 
-    // __test {
-    // 	solve();
-    // }
-    
-    showTime;
-    return 0;
+	__test {
+		solve();
+	}
+	
+	showTime;
+	return 0;
 }
 
